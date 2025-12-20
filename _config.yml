@@ -1,8 +1,8 @@
 # Jekyll configuration for GitHub README Theme
 
 # Repository information for edit links
-repo_owner: "your-username"
-repo_name: "your-repo"
+repo_owner: "lukehefson"
+repo_name: "github-readme-theme"
 repo_branch: "main"
 
 # Jekyll settings
