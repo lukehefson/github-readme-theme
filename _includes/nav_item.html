@@ -1,0 +1,11 @@
+<li class="nav-item {% if page.page_url == include.item.url %}active{% endif %}">
+  <a href="{{ include.item.url | relative_url }}">{{ include.item.title }}</a>
+  {% if include.item.children %}
+    <ul class="nav-children">
+      {% for child in include.item.children %}
+        {% include nav_item.html item=child %}
+      {% endfor %}
+    </ul>
+  {% endif %}
+</li>
+

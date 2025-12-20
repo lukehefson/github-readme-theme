@@ -1,0 +1,15 @@
+{% if site.data.nav %}
+  <ul class="nav-tree">
+    {% if site.data.nav.root %}
+      <li class="nav-item {% if page.page_url == site.data.nav.root.url %}active{% endif %}">
+        <a href="{{ site.data.nav.root.url | relative_url }}">{{ site.data.nav.root.title }}</a>
+      </li>
+    {% endif %}
+    {% if site.data.nav.children %}
+      {% for child in site.data.nav.children %}
+        {% include nav_item.html item=child %}
+      {% endfor %}
+    {% endif %}
+  </ul>
+{% endif %}
+

@@ -1,0 +1,22 @@
+# Jekyll configuration for GitHub README Theme
+
+# Repository information for edit links
+repo_owner: "your-username"
+repo_name: "your-repo"
+repo_branch: "main"
+
+# Jekyll settings
+markdown: kramdown
+highlighter: rouge
+plugins:
+  - jekyll-feed
+
+# Exclude generated files from source
+exclude:
+  - node_modules
+  - package.json
+  - package-lock.json
+  - scripts
+  - .git
+  - .gitignore
+
