@@ -1,4 +1,15 @@
-# Test — this is H1
+---
+layout: default
+readme_path: "README.md"
+page_url: "/"
+edit_url: "https://github.com/lukehefson/github-readme-theme/edit/main/README.md"
+title: "github-readme-theme"
+breadcrumb:
+  - title: "github-readme-theme"
+    url: "/"
+---
+
+# Headings — this is H1
 
 Body text.
 

@@ -292,15 +292,30 @@ No README files found in this repository.
       
       let outputPath;
       if (readme.isRoot) {
-        outputPath = path.join(GENERATED_DIR, 'index.md');
+        // Create in _generated for organization
+        const generatedPath = path.join(GENERATED_DIR, 'index.md');
+        fs.writeFileSync(generatedPath, pageContent, 'utf-8');
+        console.log(`Generated: ${generatedPath}`);
+        
+        // Also create root index.md so Jekyll serves it as the homepage
+        const rootPath = path.join(REPO_ROOT, 'index.md');
+        fs.writeFileSync(rootPath, pageContent, 'utf-8');
+        console.log(`Generated: ${rootPath}`);
       } else {
+        // Create in _generated for organization
         const dirPath = path.join(GENERATED_DIR, readme.relativePath);
         fs.mkdirSync(dirPath, { recursive: true });
-        outputPath = path.join(dirPath, 'index.md');
+        const generatedPath = path.join(dirPath, 'index.md');
+        fs.writeFileSync(generatedPath, pageContent, 'utf-8');
+        console.log(`Generated: ${generatedPath}`);
+        
+        // Also create in root so Jekyll serves it at the correct URL
+        const rootDirPath = path.join(REPO_ROOT, readme.relativePath);
+        fs.mkdirSync(rootDirPath, { recursive: true });
+        const rootPath = path.join(rootDirPath, 'index.md');
+        fs.writeFileSync(rootPath, pageContent, 'utf-8');
+        console.log(`Generated: ${rootPath}`);
       }
-      
-      fs.writeFileSync(outputPath, pageContent, 'utf-8');
-      console.log(`Generated: ${outputPath}`);
     }
   }
   

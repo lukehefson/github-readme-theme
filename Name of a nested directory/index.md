@@ -1,3 +1,16 @@
+---
+layout: default
+readme_path: "Name of a nested directory/README.md"
+page_url: "/Name%20of%20a%20nested%20directory/"
+edit_url: "https://github.com/lukehefson/github-readme-theme/edit/main/Name%20of%20a%20nested%20directory%2FREADME.md"
+title: "Name of a nested directory"
+breadcrumb:
+  - title: "github-readme-theme"
+    url: "/"
+  - title: "Name of a nested directory"
+    url: "/Name%20of%20a%20nested%20directory/"
+---
+
 # Test — this is H1
 
 Body text.

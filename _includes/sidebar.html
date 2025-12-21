@@ -2,7 +2,14 @@
   <ul class="nav-tree">
     {% if site.data.nav.root %}
       <li class="nav-item {% if page.page_url == site.data.nav.root.url %}active{% endif %}">
-        <a href="{{ site.data.nav.root.url | relative_url }}">{{ site.data.nav.root.title }}</a>
+        <a href="{{ site.data.nav.root.url | relative_url }}">
+          <span class="nav-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.75 2.5C1.75 2.08579 2.08579 1.75 2.5 1.75H6.43934C6.72064 1.75 6.98451 1.88541 7.15901 2.11971L8.25 3.5H13.5C13.9142 3.5 14.25 3.83579 14.25 4.25V13.5C14.25 13.9142 13.9142 14.25 13.5 14.25H2.5C2.08579 14.25 1.75 13.9142 1.75 13.5V2.5Z" fill="#0969da" stroke="#0969da" stroke-width="0.5"/>
+            </svg>
+          </span>
+          <span class="nav-text">{{ site.data.nav.root.title }}</span>
+        </a>
       </li>
     {% endif %}
     {% if site.data.nav.children %}

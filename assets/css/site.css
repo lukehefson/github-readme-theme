@@ -104,13 +104,16 @@ body {
 }
 
 .nav-item > a {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   padding: 6px 12px;
   color: var(--text-color);
   text-decoration: none;
   border-radius: 6px;
   transition: background-color 0.2s;
   font-size: 14px;
+  position: relative;
 }
 
 .nav-item > a:hover {
@@ -118,16 +121,38 @@ body {
 }
 
 .nav-item.active > a {
-  background-color: var(--active-bg);
-  color: var(--active-text);
+  background-color: var(--hover-bg);
+  color: var(--text-color);
   font-weight: 600;
+  border-left: 3px solid var(--active-bg);
+  padding-left: 9px; /* Adjust for border */
+}
+
+.nav-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.nav-chevron {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: auto;
+  color: #656d76;
+  width: 16px;
+  height: 16px;
+}
+
+.nav-text {
+  flex: 1;
 }
 
 .nav-children {
   list-style: none;
   margin: 0;
-  padding-left: 16px;
-  margin-top: 4px;
+  padding-left: 20px;
+  margin-top: 2px;
 }
 
 /* Main Content Styles */
@@ -152,7 +177,7 @@ body {
 }
 
 .sidebar-toggle-mobile {
-  display: none;
+  display: none; /* Hidden by default on desktop */
   background: none;
   border: none;
   cursor: pointer;
@@ -162,10 +187,16 @@ body {
   color: var(--text-color);
   border-radius: 4px;
   transition: background-color 0.2s;
+  flex-shrink: 0;
 }
 
 .sidebar-toggle-mobile:hover {
   background-color: var(--hover-bg);
+}
+
+/* Show toggle button when sidebar is collapsed (so user can reopen it) */
+.site-container.sidebar-collapsed .sidebar-toggle-mobile {
+  display: flex !important;
 }
 
 .breadcrumb-container {

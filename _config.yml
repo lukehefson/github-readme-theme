@@ -11,7 +11,11 @@ highlighter: rouge
 plugins:
   - jekyll-feed
 
-# Exclude generated files from source
+# Include generated files - Jekyll will process .md files in _generated
+include:
+  - _generated
+
+# Exclude files from source
 exclude:
   - node_modules
   - package.json
@@ -19,4 +23,10 @@ exclude:
   - scripts
   - .git
   - .gitignore
+  - README-2.md
+  - TESTING_GUIDE.md
+  - PLAN.md
+  - copy-to-repo.sh
+  - README.md  # Exclude original README since we use generated index.md
+  - "Name of a nested directory/README.md"  # Exclude actual README, use generated index.md
 
