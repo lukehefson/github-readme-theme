@@ -10,6 +10,7 @@ markdown: kramdown
 highlighter: rouge
 plugins:
   - jekyll-feed
+  - jekyll-octicons
 
 # Include generated files - Jekyll will process .md files in _generated
 include:

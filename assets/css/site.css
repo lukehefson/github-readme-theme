@@ -1,7 +1,7 @@
 /* Site-specific styles for GitHub README Theme */
 
 :root {
-  --sidebar-width: 240px;
+  --sidebar-width: 320px;
   --sidebar-collapsed-width: 0px;
   --header-height: 60px;
   --spacing-unit: 16px;
@@ -59,9 +59,8 @@ body {
 .sidebar-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 8px;
   padding: var(--spacing-unit);
-  border-bottom: 1px solid var(--border-color);
   height: var(--header-height);
 }
 
@@ -69,6 +68,7 @@ body {
   margin: 0;
   font-size: 16px;
   font-weight: 600;
+  flex: 1;
 }
 
 .sidebar-toggle {
@@ -79,13 +79,21 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-color);
+  color: #24292f; /* Darker grey when sidebar is open (permanently on) */
   border-radius: 4px;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, color 0.2s;
+  position: relative;
+  top: 4px;
+}
+
+.sidebar-toggle svg {
+  width: 20px;
+  height: 20px;
 }
 
 .sidebar-toggle:hover {
   background-color: var(--hover-bg);
+  color: #656d76; /* Lighter grey on hover when sidebar is open */
 }
 
 .sidebar-nav {
@@ -184,14 +192,22 @@ body {
   padding: 4px;
   align-items: center;
   justify-content: center;
-  color: var(--text-color);
+  color: var(--text-color); /* Default color when sidebar is closed (not permanently on) */
   border-radius: 4px;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, color 0.2s;
   flex-shrink: 0;
+  position: relative;
+  top: 4px;
+}
+
+.sidebar-toggle-mobile svg {
+  width: 20px;
+  height: 20px;
 }
 
 .sidebar-toggle-mobile:hover {
   background-color: var(--hover-bg);
+  color: #656d76; /* Lighter grey on hover when sidebar is closed */
 }
 
 /* Show toggle button when sidebar is collapsed (so user can reopen it) */
@@ -204,7 +220,7 @@ body {
 }
 
 .breadcrumb {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .breadcrumb ol {

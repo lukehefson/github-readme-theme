@@ -11,14 +11,11 @@
   <div class="site-container">
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-header">
-        <h2>Navigation</h2>
         <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle navigation">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="1" y="2" width="9" height="12" rx="1" fill="#d0d7de"/>
-            <path d="M3.5 8L5 7L5 9L3.5 8Z" fill="#24292f"/>
-            <rect x="11" y="2" width="4" height="12" rx="1" stroke="#656d76" stroke-width="1.5" fill="none"/>
-          </svg>
+          <span class="icon-expand">{% octicon sidebar-expand height:16 %}</span>
+          <span class="icon-collapse" style="display: none;">{% octicon sidebar-collapse height:16 %}</span>
         </button>
+        <h2>Navigation</h2>
       </div>
       <nav class="sidebar-nav">
         {% include sidebar.html %}
@@ -28,11 +25,8 @@
     <main class="main-content">
       <header class="content-header">
         <button class="sidebar-toggle-mobile" id="sidebar-toggle-mobile" aria-label="Toggle navigation">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="1" y="2" width="9" height="12" rx="1" fill="#d0d7de"/>
-            <path d="M3.5 8L5 7L5 9L3.5 8Z" fill="#24292f"/>
-            <rect x="11" y="2" width="4" height="12" rx="1" stroke="#656d76" stroke-width="1.5" fill="none"/>
-          </svg>
+          <span class="icon-collapse">{% octicon sidebar-collapse height:16 %}</span>
+          <span class="icon-expand" style="display: none;">{% octicon sidebar-expand height:16 %}</span>
         </button>
         <div class="breadcrumb-container">
           {% include breadcrumb.html %}
