@@ -135,14 +135,31 @@ body {
   background-color: var(--hover-bg);
   color: var(--text-color);
   font-weight: 600;
-  border-left: 3px solid var(--active-bg);
-  padding-left: 9px; /* Adjust for border */
+  position: relative;
+  margin-left: 8px; /* Space for blue bar + gap */
+}
+
+.nav-item.active > a::before {
+  content: '';
+  position: absolute;
+  left: -8px; /* Position outside with 4px gap */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px; /* Thicker blue line */
+  height: 24px;
+  background-color: var(--active-bg);
+  border-radius: 2px;
 }
 
 .nav-icon {
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  color: #6bacf9;
+}
+
+.nav-icon svg {
+  fill: #6bacf9;
 }
 
 .nav-chevron {
