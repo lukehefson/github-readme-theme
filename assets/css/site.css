@@ -72,28 +72,31 @@ body {
 }
 
 .sidebar-toggle {
-  background: none;
+  background: #e7ebef; /* Lighter grey background (permanently on when sidebar is open) */
   border: none;
   cursor: pointer;
-  padding: 4px;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #24292f; /* Darker grey when sidebar is open (permanently on) */
-  border-radius: 4px;
+  width: 34px;
+  height: 34px;
+  color: #5b636d; /* Icon color */
+  border-radius: 6px;
   transition: background-color 0.2s, color 0.2s;
   position: relative;
-  top: 4px;
+  top: 2px;
 }
 
 .sidebar-toggle svg {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
 }
 
 .sidebar-toggle:hover {
-  background-color: var(--hover-bg);
-  color: #656d76; /* Lighter grey on hover when sidebar is open */
+  background-color: #f6f8fa; /* Darker grey background on hover */
+  color: #5b636d; /* Keep icon color on hover */
 }
 
 .sidebar-nav {
@@ -186,28 +189,31 @@ body {
 
 .sidebar-toggle-mobile {
   display: none; /* Hidden by default on desktop */
-  background: none;
+  background: none; /* No background when sidebar is closed (not permanently on) */
   border: none;
   cursor: pointer;
-  padding: 4px;
+  padding: 0;
   align-items: center;
   justify-content: center;
-  color: var(--text-color); /* Default color when sidebar is closed (not permanently on) */
-  border-radius: 4px;
+  width: 34px;
+  height: 34px;
+  color: #5b636d; /* Icon color */
+  border-radius: 6px;
   transition: background-color 0.2s, color 0.2s;
   flex-shrink: 0;
   position: relative;
-  top: 4px;
+  top: 2px;
 }
 
 .sidebar-toggle-mobile svg {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
 }
 
 .sidebar-toggle-mobile:hover {
-  background-color: var(--hover-bg);
-  color: #656d76; /* Lighter grey on hover when sidebar is closed */
+  background-color: #f6f8fa; /* Light grey background on hover when sidebar is closed */
+  color: #5b636d; /* Keep icon color on hover */
 }
 
 /* Show toggle button when sidebar is collapsed (so user can reopen it) */
