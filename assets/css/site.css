@@ -101,6 +101,7 @@ body {
 
 .sidebar-nav {
   padding: var(--spacing-unit);
+  padding-left: calc(var(--spacing-unit) + 10px);
 }
 
 .nav-tree {
@@ -116,30 +117,109 @@ body {
 }
 
 .nav-item > a {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   padding: 4px 8px;
+  margin: 1px 0;
   text-decoration: none;
   color: var(--text-color);
   border-radius: 6px;
   transition: background-color 0.15s ease;
   font-size: 14px;
+  position: relative;
 }
 
+/* Indent content within boxes based on nesting level - boxes always align left */
+.nav-tree > .nav-item > a {
+  padding-left: 8px;
+}
+
+/* Each nested level adds 8px to the left padding of the content */
+.nav-children .nav-item > a {
+  padding-left: calc(8px + var(--nesting-level, 0) * 8px);
+}
+
+/* Set nesting level via CSS custom property for dynamic calculation */
+.nav-tree > .nav-item > .nav-children > .nav-item > a {
+  --nesting-level: 1;
+  padding-left: 16px;
+}
+
+.nav-tree > .nav-item > .nav-children > .nav-item > .nav-children > .nav-item > a {
+  --nesting-level: 2;
+  padding-left: 24px;
+}
+
+.nav-tree > .nav-item > .nav-children > .nav-item > .nav-children > .nav-item > .nav-children > .nav-item > a {
+  --nesting-level: 3;
+  padding-left: 32px;
+}
+
+/* Continue pattern for deeper nesting - add more rules as needed */
+.nav-tree > .nav-item > .nav-children > .nav-item > .nav-children > .nav-item > .nav-children > .nav-item > .nav-children > .nav-item > a {
+  --nesting-level: 4;
+  padding-left: 40px;
+}
 .nav-item > a:hover {
   background-color: var(--hover-bg);
 }
 
 .nav-item.active > a {
+  background-color: #f6f8fa;
+}
+
+.nav-item.active > a::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 25px;
   background-color: var(--active-bg);
-  color: var(--active-text);
-  font-weight: 600;
+  border-radius: 3px;
+}
+
+.nav-chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: #656d76;
+}
+
+.nav-chevron svg {
+  display: block;
+}
+
+.nav-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: #6bacf9;
+}
+
+.nav-icon svg {
+  fill: #6bacf9;
+  width: 16px;
+  height: 16px;
+}
+
+.nav-text {
+  flex: 1;
 }
 
 /* Hide all nav children by default to prevent flash before JS loads */
 .nav-children {
   list-style: none;
   margin: 0;
-  padding-left: 8px;
+  padding: 0;
   display: none !important;
 }
 
