@@ -72,7 +72,7 @@ body {
 }
 
 .sidebar-toggle {
-  background: #e7ebef; /* Lighter grey background (permanently on when sidebar is open) */
+  background: #e7ebef;
   border: none;
   cursor: pointer;
   padding: 0;
@@ -81,7 +81,7 @@ body {
   justify-content: center;
   width: 34px;
   height: 34px;
-  color: #5b636d; /* Icon color */
+  color: #5b636d;
   border-radius: 6px;
   transition: background-color 0.2s, color 0.2s;
   position: relative;
@@ -95,8 +95,8 @@ body {
 }
 
 .sidebar-toggle:hover {
-  background-color: #f6f8fa; /* Darker grey background on hover */
-  color: #5b636d; /* Keep icon color on hover */
+  background-color: #f6f8fa;
+  color: #5b636d;
 }
 
 .sidebar-nav {
@@ -112,49 +112,45 @@ body {
 .nav-item {
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
 .nav-item > a {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 12px;
-  color: var(--text-color);
+  padding: 6px 0;
   text-decoration: none;
-  border-radius: 6px;
-  transition: background-color 0.2s;
-  font-size: 14px;
-  position: relative;
-}
-
-.nav-item > a:hover {
-  background-color: var(--hover-bg);
-}
-
-.nav-item.active > a {
-  background-color: var(--hover-bg);
   color: var(--text-color);
-  font-weight: 600;
-  position: relative;
-  margin-left: 8px; /* Space for blue bar + gap */
 }
 
-.nav-item.active > a::before {
-  content: '';
-  position: absolute;
-  left: -8px; /* Position outside with 4px gap */
-  top: 50%;
-  transform: translateY(-50%);
-  width: 4px; /* Thicker blue line */
-  height: 24px;
-  background-color: var(--active-bg);
-  border-radius: 2px;
+.nav-children {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: none !important;
+}
+
+.nav-item.expanded .nav-children {
+  display: block !important;
+}
+
+.nav-chevron {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+.nav-chevron svg {
+  display: block;
 }
 
 .nav-icon {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   flex-shrink: 0;
+  vertical-align: middle;
   color: #6bacf9;
 }
 
@@ -162,28 +158,10 @@ body {
   fill: #6bacf9;
 }
 
-.nav-chevron {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  margin-left: auto;
-  color: #656d76;
-  width: 16px;
-  height: 16px;
-}
-
 .nav-text {
   flex: 1;
 }
 
-.nav-children {
-  list-style: none;
-  margin: 0;
-  padding-left: 20px;
-  margin-top: 2px;
-}
-
-/* Main Content Styles */
 .main-content {
   display: flex;
   flex-direction: column;
@@ -205,8 +183,8 @@ body {
 }
 
 .sidebar-toggle-mobile {
-  display: none; /* Hidden by default on desktop */
-  background: none; /* No background when sidebar is closed (not permanently on) */
+  display: none;
+  background: none;
   border: none;
   cursor: pointer;
   padding: 0;
@@ -214,7 +192,7 @@ body {
   justify-content: center;
   width: 34px;
   height: 34px;
-  color: #5b636d; /* Icon color */
+  color: #5b636d;
   border-radius: 6px;
   transition: background-color 0.2s, color 0.2s;
   flex-shrink: 0;
@@ -229,11 +207,10 @@ body {
 }
 
 .sidebar-toggle-mobile:hover {
-  background-color: #f6f8fa; /* Light grey background on hover when sidebar is closed */
-  color: #5b636d; /* Keep icon color on hover */
+  background-color: #f6f8fa;
+  color: #5b636d;
 }
 
-/* Show toggle button when sidebar is collapsed (so user can reopen it) */
 .site-container.sidebar-collapsed .sidebar-toggle-mobile {
   display: flex !important;
 }
@@ -302,7 +279,6 @@ body {
   flex-shrink: 0;
 }
 
-/* Markdown Body Styles */
 .markdown-body {
   padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
   max-width: 1012px;
@@ -310,7 +286,6 @@ body {
   width: 100%;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .site-container {
     grid-template-columns: 1fr;
@@ -343,4 +318,3 @@ body {
     height: auto;
   }
 }
-

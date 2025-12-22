@@ -6,6 +6,32 @@
   <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.repo_name }}</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css">
   <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+  <style>
+    /* Hide all nav children immediately - before JavaScript runs */
+    .nav-children {
+      display: none !important;
+    }
+  </style>
+  <script>
+    // Hide all nav children immediately to prevent flash of expanded content
+    (function() {
+      function hideChildren() {
+        const children = document.querySelectorAll('.nav-children');
+        children.forEach(el => {
+          el.style.display = 'none';
+          el.style.setProperty('display', 'none', 'important');
+        });
+      }
+      
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', hideChildren);
+        // Try immediately too
+        setTimeout(hideChildren, 0);
+      } else {
+        hideChildren();
+      }
+    })();
+  </script>
 </head>
 <body>
   <div class="site-container">
