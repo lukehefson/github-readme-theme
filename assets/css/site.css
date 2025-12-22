@@ -116,50 +116,35 @@ body {
 }
 
 .nav-item > a {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 0;
+  display: block;
+  padding: 4px 8px;
   text-decoration: none;
   color: var(--text-color);
+  border-radius: 6px;
+  transition: background-color 0.15s ease;
+  font-size: 14px;
 }
 
+.nav-item > a:hover {
+  background-color: var(--hover-bg);
+}
+
+.nav-item.active > a {
+  background-color: var(--active-bg);
+  color: var(--active-text);
+  font-weight: 600;
+}
+
+/* Hide all nav children by default to prevent flash before JS loads */
 .nav-children {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding-left: 8px;
   display: none !important;
 }
 
-.nav-item.expanded .nav-children {
+.nav-item.expanded > .nav-children {
   display: block !important;
-}
-
-.nav-chevron {
-  display: inline-flex;
-  align-items: center;
-  flex-shrink: 0;
-  vertical-align: middle;
-}
-
-.nav-chevron svg {
-  display: block;
-}
-
-.nav-icon {
-  display: inline-flex;
-  align-items: center;
-  flex-shrink: 0;
-  vertical-align: middle;
-  color: #6bacf9;
-}
-
-.nav-icon svg {
-  fill: #6bacf9;
-}
-
-.nav-text {
-  flex: 1;
 }
 
 .main-content {

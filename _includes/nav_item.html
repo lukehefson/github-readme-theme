@@ -1,20 +1,5 @@
-<li class="nav-item {% if page.page_url == include.item.url %}active{% endif %} {% if include.item.children %}has-children{% endif %}">
-  <a href="{{ include.item.url | relative_url }}">
-    {% if include.item.children %}
-      <span class="nav-chevron">
-        <svg class="chevron-right" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <svg class="chevron-down" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: none;">
-          <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </span>
-    {% endif %}
-    <span class="nav-icon">
-      {% octicon file-directory-open-fill height:16 %}
-    </span>
-    <span class="nav-text">{{ include.item.title }}</span>
-  </a>
+<li class="nav-item {% if page.page_url == include.item.url %}active{% endif %}">
+  <a href="{{ include.item.url | relative_url }}">{{ include.item.title }}</a>
   {% if include.item.children %}
     <ul class="nav-children">
       {% for child in include.item.children %}
