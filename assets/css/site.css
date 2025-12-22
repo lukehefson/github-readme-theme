@@ -345,10 +345,16 @@ body {
 }
 
 .markdown-body {
-  padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+  padding: 42px calc(var(--spacing-unit) * 2) var(--spacing-unit);
   max-width: 1012px;
   margin: 0 auto;
   width: 100%;
+}
+
+.markdown-body img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 @media (max-width: 768px) {

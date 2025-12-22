@@ -8,6 +8,11 @@ repo_branch: "main"
 # Jekyll settings
 markdown: kramdown
 highlighter: rouge
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: true
+  syntax_highlighter: rouge
 plugins:
   - jekyll-feed
   - jekyll-octicons
