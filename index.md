@@ -9,216 +9,107 @@ breadcrumb:
     url: "/"
 ---
 
-# Headings — this is H1
+# GitHub README Theme
 
-Body text.
+A reusable Jekyll theme that renders a GitHub repository's `README.md` files as a clean, GitHub-style documentation site with navigation.
 
-## H2
+## Features
 
-Body text.
+- 🎨 Matches GitHub's markdown styling
+- 📁 Automatic navigation tree from README files
+- 🔄 Collapsible sidebar with localStorage persistence
+- 🍞 Breadcrumb navigation
+- ✏️ Direct edit links to GitHub
+- 🚀 Built via GitHub Actions
 
-### H3
+## Quick Start
 
-Body text.
+1. **Configure your repository** in `_config.yml`:
+   ```yaml
+   repo_owner: "your-username"
+   repo_name: "your-repo"
+   repo_branch: "main"
+   ```
 
-#### H4
+2. **Generate the site**:
+   ```bash
+   npm run generate
+   ```
 
-Body text.
+3. **Build and serve locally** (optional):
+   ```bash
+   npm run serve
+   ```
 
-##### H5
+4. **Deploy**: Push to GitHub and the Actions workflow will build and deploy to GitHub Pages.
 
-Body text.
+## Project Structure
 
-###### H6
+```
+/
+├── _config.yml              # Jekyll configuration
+├── _layouts/
+│   └── default.html        # Main layout template
+├── _includes/
+│   ├── sidebar.html        # Navigation sidebar
+│   ├── nav_item.html       # Recursive nav item
+│   ├── breadcrumb.html     # Breadcrumb navigation
+│   └── edit_button.html    # Edit on GitHub button
+├── assets/
+│   ├── css/
+│   │   └── site.css        # Custom styles
+│   └── js/
+│       └── site.js         # Sidebar toggle logic
+├── scripts/
+│   └── generate-readme-site.mjs  # Generator script
+└── .github/workflows/
+    └── build.yml           # GitHub Actions workflow
+```
 
-Paragraph with **bold**, *italic*, ***bold italic***, ~~strikethrough~~, `inline code`, and <sub>subscript</sub> / <sup>superscript</sup>.  
-Keyboard key example: <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd>.
+## How It Works
 
-## Lists
+1. **Generator Script** (`scripts/generate-readme-site.mjs`):
+   - Scans the repository for all `README.md` files
+   - Generates Jekyll pages in `_generated/` with proper front matter
+   - Creates `_data/nav.json` for navigation tree
 
-- Unordered item
-  - Nested unordered item
-    - Deep nested unordered item
+2. **Jekyll Theme**:
+   - Renders generated pages using the default layout
+   - Displays navigation sidebar, breadcrumbs, and edit buttons
+   - Applies GitHub markdown styling
 
-1. Ordered item
-2. Another ordered item
-   1. Nested ordered item
-   2. Another nested ordered item
-      1. Deep nested ordered item
-      2. Another deep nested ordered item
+3. **GitHub Actions**:
+   - Runs generator script
+   - Builds Jekyll site
+   - Deploys to GitHub Pages
 
-- [ ] Task list item
-  - Nested unordered item
-    1. Deep nested ordered item
-  - [ ] Nested task list item
+## URL Structure
 
-## Links
+- `/` → Root `README.md`
+- `/<directory>/` → `<directory>/README.md`
+- `/<directory>/<subdirectory>/` → `<directory>/<subdirectory>/README.md`
 
-[Inline link](https://github.com)  
-[Section link to H6 heading](#h6)  
-Autolink: https://example.com
+Directory names with spaces are automatically URL-encoded.
 
-## Images
+## Navigation Rules
 
-Vanilla image link:
-![A lovely kitten](http://bit.ly/1RXe87U)
+- Only directories containing a `README.md` appear in navigation
+- Navigation tree is built recursively
+- Items are sorted alphabetically
 
-<div align="center">
-<img src="http://bit.ly/1RXe87U" width="200">
-<p>Or, a centred image with centred text and the image size reduced.</p>
-</div>
-
-## Blockquote
-
-> Block quotes are written like so.
->
-> > They can be nested and span multiple paragraphs.
-> > If you like
-
-## Code
-
-Example of inline `code`
-
-### Code block examples
+## Development
 
 ```bash
-# Code block with bash
-brew install git
+# Generate site files
+npm run generate
+
+# Build Jekyll site
+npm run build
+
+# Serve locally
+npm run serve
 ```
 
-```js
-// JavaScript code block
-function hi() {
-  console.log("Hello!");
-}
-```
+## License
 
-```diff
-- Deletion
-+ Addition
-! Warning
-@@ Diff hunk header @@
-# Comment
-```
-
-## Tables
-
-### Vanilla
-
-| Feature   | Supported |
-| --------- | --------- |
-| Lists     | ✅         |
-| Tables    | ✅         |
-| Task list | ✅         |
-
-### Aligned
-
-| Left     | Center   | Right    |
-|:---------|:--------:|---------:|
-| a        | b        | c        |
-| d        | e        | f        |
-
-## Footnotes
-
-Here is a simple footnote. Zoom to the bottom to see the reference [^1].
-
-A footnote can also have multiple lines [^2].
-
-[^1]: My reference.
-[^2]: To add line breaks within a footnote, prefix new lines with 2 spaces.
-  This is a second line.
-
-## Collapsible section
-
-<details>
-  <summary>Click to expand</summary>
-
-Hidden text inside a collapsible section.
-
-</details>
-
-## HTML elements GitHub allows
-
-<sub>Subscript text</sub> <sup>Superscript text</sup> <kbd>KBD Key</kbd> <b>Bold HTML</b> <i>Italic HTML</i>
-
-<details><summary>HTML-only details</summary>More HTML content</details>
-
-## Alerts 
-
-> [!NOTE]
-> Useful information that users should know, even when skimming content.
-
-> [!TIP]
-> Helpful advice for doing things better or more easily.
-
-> [!IMPORTANT]
-> Key information users need to know to achieve their goal.
-
-> [!WARNING]
-> Urgent info that needs immediate user attention to avoid problems.
-
-> [!CAUTION]
-> Advises about risks or negative outcomes of certain actions.
-
-## Math
-
-Inline math: $E = mc^2$
-
-Block math:
-
-$$
-a^2 + b^2 = c^2
-$$
-
-## Diff highlighting
-
-```diff
-+ Added line
-- Removed line
-```
-
-## Mentions and references
-
-Mention: @octocat
-Issue referenced by number: #1
-Pull request referenced by URL: https://github.com/wesbos/dad-jokes/pull/224
-
-- When an issue or PR reference is featured within a list item the full title gets rendered: https://github.com/left-pad/left-pad/issues/30
-
-## Emoji
-
-:rocket: :tada:
-
-## Mixed Markdown and HTML
-
-A paragraph with <i>HTML inline</i> plus **Markdown bold**.
-
-End of file.
-
-# Horizontal Rule
-
----
-
-# Line breaks
-
-In a markdown file, this example 
-won't span two lines (in a comment it will)
-
-In a markdown file, this example\
-Will span two lines
-
-# Escaping some markdown elements
-
-\*Asterisks wrapped around text\*  
-\# Using a `#` character, but not a heading  
-\> Using a `>` character, but not a blockquote  
-
-# HTML Elements
-
-<p>This is a raw HTML paragraph in Markdown. Below there is some commented-out text and hmtl line breaks.</p>
-
-<!-- This comment won't render -->
-
-</br>
-</br>
-</br>
+MIT
