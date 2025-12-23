@@ -16,6 +16,7 @@ kramdown:
 plugins:
   - jekyll-feed
   - jekyll-octicons
+  - jemoji
 
 # Include generated files - Jekyll will process .md files in _generated
 include:

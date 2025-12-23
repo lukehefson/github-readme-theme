@@ -322,26 +322,32 @@ body {
 }
 
 .edit-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  background-color: var(--bg-color);
-  border: 1px solid var(--border-color);
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  color: #5b636d;
   border-radius: 6px;
-  color: var(--text-color);
+  transition: background-color 0.2s, color 0.2s;
+  position: relative;
+  top: 2px;
   text-decoration: none;
-  font-size: 14px;
-  transition: background-color 0.2s, border-color 0.2s;
-}
-
-.edit-button:hover {
-  background-color: var(--hover-bg);
-  border-color: #8c959f;
 }
 
 .edit-button svg {
-  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.edit-button:hover {
+  background-color: #f6f8fa;
+  color: #5b636d;
 }
 
 .markdown-body {
@@ -355,6 +361,18 @@ body {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+.markdown-body .footnote {
+  text-decoration: underline;
+}
+
+.markdown-body .footnote::before {
+  content: '[';
+}
+
+.markdown-body .footnote::after {
+  content: ']';
 }
 
 @media (max-width: 768px) {
