@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "generate": "node scripts/generate-readme-site.mjs",
-    "build": "npm run generate && jekyll build",
-    "serve": "npm run generate && jekyll serve"
+    "build": "npm run generate && bundle exec jekyll build",
+    "serve": "npm run generate && bundle exec jekyll serve"
   },
   "keywords": [
     "jekyll",

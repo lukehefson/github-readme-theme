@@ -30,6 +30,31 @@ cp .gitignore "$TARGET_DIR/"
 
 echo "Files copied successfully!"
 echo ""
+
+# Validate critical files
+echo "Validating copied files..."
+VALIDATION_FAILED=0
+
+# Check that default.html starts correctly
+if ! head -n 1 "$TARGET_DIR/_layouts/default.html" | grep -q "^<!DOCTYPE html>"; then
+    echo "⚠️  WARNING: _layouts/default.html doesn't start with <!DOCTYPE html>"
+    echo "   First line: $(head -n 1 "$TARGET_DIR/_layouts/default.html")"
+    VALIDATION_FAILED=1
+fi
+
+# Check that _config.yml exists and has required fields
+if [ ! -f "$TARGET_DIR/_config.yml" ]; then
+    echo "⚠️  WARNING: _config.yml not found"
+    VALIDATION_FAILED=1
+fi
+
+if [ $VALIDATION_FAILED -eq 0 ]; then
+    echo "✓ Validation passed"
+else
+    echo "⚠️  Validation found issues - please review the files"
+fi
+
+echo ""
 echo "Next steps:"
 echo "1. cd $TARGET_DIR"
 echo "2. Edit _config.yml with your repo details:"
