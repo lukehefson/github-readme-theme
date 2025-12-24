@@ -1,14 +1,14 @@
 ---
 layout: default
-readme_path: "Name of a nested directory/README.md"
-page_url: "/Name%20of%20a%20nested%20directory/"
-edit_url: "https://github.com/lukehefson/github-readme-theme/edit/main/Name%20of%20a%20nested%20directory%2FREADME.md"
-title: "Name of a nested directory"
+readme_path: "A nested directory for testing/README.md"
+page_url: "/A%20nested%20directory%20for%20testing/"
+edit_url: "https://github.com/lukehefson/github-readme-theme/edit/main/A%20nested%20directory%20for%20testing%2FREADME.md"
+title: "A nested directory for testing"
 breadcrumb:
   - title: "github-readme-theme"
     url: "/"
-  - title: "Name of a nested directory"
-    url: "/Name%20of%20a%20nested%20directory/"
+  - title: "A nested directory for testing"
+    url: "/A%20nested%20directory%20for%20testing/"
 ---
 
 # Test — this is H1
