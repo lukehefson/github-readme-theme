@@ -41,10 +41,19 @@ You have two options:
 
 If you have this theme repository locally:
 
-```bash
-cd /path/to/github-readme-theme
-./copy-to-repo.sh /path/to/your-repo
-```
+1. First, clone or navigate to your target repository (the one you want to apply the theme to):
+   ```bash
+   git clone https://github.com/your-username/your-repo.git
+   # or if already cloned, just note the path
+   ```
+
+2. Then, from the theme repository, run the copy script:
+   ```bash
+   cd /path/to/github-readme-theme
+   ./copy-to-repo.sh /path/to/your-repo
+   ```
+   
+   The script will copy all theme files to your target repository. You don't need to be inside the target repo - just provide its path.
 
 **Option B: Manual Copy**
 
