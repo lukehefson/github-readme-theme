@@ -60,7 +60,8 @@ function findReadmeFiles(dir = REPO_ROOT, relativePath = '') {
         entry.name === '_generated' ||
         entry.name === '_site' ||
         entry.name === 'scripts' ||
-        entry.name === 'docs') {
+        entry.name === 'docs' ||
+        entry.name === 'vendor') {
       continue;
     }
     
