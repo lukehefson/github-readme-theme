@@ -195,7 +195,28 @@ function buildNavTree(readmes, repoName) {
     };
   }
   
-  // Build tree structure
+  // Build a set of all paths that have READMEs
+  const readmePaths = new Set();
+  readmes.forEach(r => {
+    if (!r.isRoot) {
+      readmePaths.add(r.relativePath);
+    }
+  });
+  
+  // Helper function to find the closest parent path that has a README
+  function findParentWithReadme(dirPath) {
+    if (!dirPath || dirPath === '.') return null;
+    const segments = dirPath.split(path.sep);
+    for (let i = segments.length - 1; i > 0; i--) {
+      const parentPath = segments.slice(0, i).join(path.sep);
+      if (readmePaths.has(parentPath)) {
+        return parentPath;
+      }
+    }
+    return null;
+  }
+  
+  // Build tree structure - only include directories that have READMEs
   const nodeMap = new Map();
   
   // Sort readmes by path for stable ordering
@@ -204,40 +225,42 @@ function buildNavTree(readmes, repoName) {
     .sort((a, b) => a.relativePath.localeCompare(b.relativePath));
   
   for (const readme of sortedReadmes) {
-    const segments = readme.relativePath.split(path.sep);
     const pageUrl = generatePageUrl(readme.relativePath);
+    const segments = readme.relativePath.split(path.sep);
+    const segment = segments[segments.length - 1]; // Last segment is the directory name
     
-    let currentLevel = tree.children;
-    let currentPath = '';
+    // Only create nodes for paths that have READMEs
+    if (!readmePaths.has(readme.relativePath)) {
+      continue;
+    }
     
-    for (let i = 0; i < segments.length; i++) {
-      const segment = segments[i];
-      currentPath = currentPath ? path.join(currentPath, segment) : segment;
-      const encodedPath = encodePathSegments(currentPath);
-      const url = '/' + encodedPath + '/';
+    // Find or create node
+    let node = nodeMap.get(readme.relativePath);
+    
+    if (!node) {
+      node = {
+        title: segment,
+        url: pageUrl,
+        children: []
+      };
+      nodeMap.set(readme.relativePath, node);
       
-      // Find or create node at this level
-      let node = nodeMap.get(currentPath);
-      
-      if (!node) {
-        node = {
-          title: segment,
-          url: url,
-          children: []
-        };
-        nodeMap.set(currentPath, node);
-        currentLevel.push(node);
-        // Sort children alphabetically
-        currentLevel.sort((a, b) => a.title.localeCompare(b.title));
+      // Find parent and add to appropriate level
+      const parentPath = findParentWithReadme(readme.relativePath);
+      if (parentPath) {
+        const parentNode = nodeMap.get(parentPath);
+        if (parentNode) {
+          parentNode.children.push(node);
+          parentNode.children.sort((a, b) => a.title.localeCompare(b.title));
+        }
+      } else {
+        // No parent with README, add to root level
+        tree.children.push(node);
+        tree.children.sort((a, b) => a.title.localeCompare(b.title));
       }
-      
-      // If this is the last segment, this is the README location
-      if (i === segments.length - 1) {
-        // Node already created, just ensure it has the right URL
-        node.url = pageUrl;
-      }
-      
-      currentLevel = node.children;
+    } else {
+      // Node exists, just ensure URL is correct
+      node.url = pageUrl;
     }
   }
   
