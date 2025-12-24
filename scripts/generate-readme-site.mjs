@@ -279,15 +279,32 @@ function generate() {
   let readmes = findReadmeFiles();
   
   // Additional safety: filter out any READMEs in vendor or other excluded paths
+  const beforeFilter = readmes.length;
   readmes = readmes.filter(r => {
     const pathStr = r.relativePath === '.' ? '' : r.relativePath;
-    return !pathStr.includes('vendor') && 
-           !pathStr.includes('node_modules') &&
-           !pathStr.includes('_generated') &&
-           !pathStr.includes('_site');
+    const fullPath = r.fullPath || '';
+    const shouldExclude = pathStr.includes('vendor') || 
+                          pathStr.includes('node_modules') ||
+                          pathStr.includes('_generated') ||
+                          pathStr.includes('_site') ||
+                          fullPath.includes('vendor') ||
+                          fullPath.includes('node_modules');
+    
+    if (shouldExclude) {
+      console.log(`Excluding README: ${r.relativePath} (fullPath: ${fullPath})`);
+    }
+    
+    return !shouldExclude;
   });
   
-  console.log(`Found ${readmes.length} README file(s)`);
+  if (beforeFilter !== readmes.length) {
+    console.log(`Filtered out ${beforeFilter - readmes.length} README(s) from excluded paths`);
+  }
+  
+  console.log(`Found ${readmes.length} README file(s) after filtering`);
+  readmes.forEach(r => {
+    console.log(`  - ${r.relativePath}`);
+  });
   
   // Clean and create directories
   if (fs.existsSync(GENERATED_DIR)) {
