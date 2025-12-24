@@ -1,7 +1,7 @@
 # Jekyll configuration for GitHub README Theme
 
-# GitHub Pages base URL (empty for custom domain/user pages, repo name for project pages)
-baseurl: ""
+# GitHub Pages base URL (repo name for project pages with custom domain)
+baseurl: "/github-readme-theme"
 url: "https://lukehefson.com"
 
 # Repository information for edit links
