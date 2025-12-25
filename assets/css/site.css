@@ -381,20 +381,11 @@ body {
   }
   
   .sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 100;
-    width: var(--sidebar-width);
-    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .site-container.sidebar-collapsed .sidebar {
-    transform: translateX(-100%);
+    display: none;
   }
   
   .sidebar-toggle-mobile {
-    display: flex;
+    display: none;
   }
   
   .markdown-body {
