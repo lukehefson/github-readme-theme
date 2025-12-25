@@ -85,9 +85,15 @@ This will create:
 - `package-lock.json` (for npm)
 - `Gemfile.lock` (for Ruby gems)
 
-**Important:** Commit these lock files to your repository for consistent builds:
+**Important:** 
+- Commit these lock files to your repository for consistent builds
+- If you're on macOS, you need to add Linux platform support (GitHub Actions runs on Linux):
 
 ```bash
+# Add Linux platform to Gemfile.lock (required for GitHub Actions)
+bundle lock --add-platform x86_64-linux
+
+# Commit the lock files
 git add package-lock.json Gemfile.lock
 git commit -m "Add dependency lock files"
 ```

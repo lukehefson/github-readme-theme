@@ -38,7 +38,9 @@ jobs:
         run: npm ci
       
       - name: Install Ruby dependencies
-        run: bundle install
+        run: |
+          bundle lock --add-platform x86_64-linux || true
+          bundle install
       
       - name: Generate README site
         run: |
