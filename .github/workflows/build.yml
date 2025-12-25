@@ -35,7 +35,12 @@ jobs:
           bundler-cache: true
       
       - name: Install npm dependencies
-        run: npm ci
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
       
       - name: Install Ruby dependencies
         run: |
