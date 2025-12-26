@@ -1,12 +1,14 @@
 # Jekyll configuration for GitHub README Theme
 
 # GitHub Pages base URL (repo name for project pages with custom domain)
-baseurl: "/github-readme-theme"
-url: "https://lukehefson.com"
+# For project pages: baseurl: "/your-repo-name"
+# For custom domain at root: baseurl: ""
+baseurl: "/your-repo-name"
+url: "https://your-username.github.io"
 
 # Repository information for edit links
-repo_owner: "lukehefson"
-repo_name: "github-readme-theme"
+repo_owner: "your-github-username"
+repo_name: "your-repo-name"
 repo_branch: "main"
 
 # Jekyll settings
@@ -34,10 +36,6 @@ exclude:
   - scripts
   - .git
   - .gitignore
-  - README-2.md
-  - TESTING_GUIDE.md
-  - PLAN.md
   - copy-to-repo.sh
   - README.md  # Exclude original README since we use generated index.md
-  - "Name of a nested directory/README.md"  # Exclude actual README, use generated index.md
 
