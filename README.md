@@ -3,8 +3,9 @@
 A reusable Jekyll theme that automatically converts your GitHub repository's `README.md` files into a beautiful, GitHub-style documentation site with automatic navigation.
 
 | From this… | …to this |
-|--------|--------|
+|:------:|:------:|
 | <img width="1338" height="876" alt="Screenshot 2025-12-26 at 11 39 17" src="https://github.com/user-attachments/assets/b6d9fb3b-fb2e-4a87-b22e-130232dd317f" /> | <img width="1339" height="871" alt="Screenshot 2025-12-26 at 11 39 46" src="https://github.com/user-attachments/assets/366724ef-d1ac-4950-8bab-06d8d2f61714" /> |
+| https://github.com/lukehefson/surfing/blob/main/README.md | https://lukehefson.com/surfing/ |
 
 ## What It Does
 
