@@ -189,18 +189,28 @@ function generateContainerPage(containerPath, config) {
   const segments = containerPath.split(path.sep);
   const title = segments[segments.length - 1];
   
+  const frontMatter = {
+    layout: 'default',
+    readme_path: '',
+    page_url: pageUrl,
+    breadcrumb: breadcrumb,
+    edit_url: '',
+    title: title,
+    is_container: true
+  };
+  
   const placeholderContent = `This directory is a container for other pages and has no content of its own.`;
   
   // Generate YAML front matter
   const yaml = `---\n` +
-    `layout: default\n` +
+    `layout: ${frontMatter.layout}\n` +
     `readme_path: ""\n` +
-    `page_url: "${pageUrl}"\n` +
+    `page_url: "${frontMatter.page_url}"\n` +
     `edit_url: ""\n` +
-    `title: "${title}"\n` +
+    `title: "${frontMatter.title}"\n` +
     `is_container: true\n` +
     `breadcrumb:\n` +
-    breadcrumb.map(crumb => 
+    frontMatter.breadcrumb.map(crumb => 
       `  - title: "${crumb.title}"\n    url: "${crumb.url}"`
     ).join('\n') +
     `\n---\n\n` +
@@ -389,7 +399,7 @@ function generate() {
     fs.mkdirSync(DATA_DIR, { recursive: true });
   }
   
-  // Generate pages
+  // Generate pages for READMEs
   if (readmes.length === 0) {
     // No READMEs found - create minimal placeholder
     const placeholderContent = `---
