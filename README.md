@@ -184,6 +184,71 @@ After deployment completes (usually 1-2 minutes):
 
 You can check the deployment status in the **Actions** tab of your repository.
 
+<details>
+<summary><strong>Updating the Theme</strong></summary>
+
+When the theme repository gets new features or bug fixes, you'll want to update your repository with the latest changes. Here's how:
+
+### Step 1: Backup Your Config
+
+The `_config.yml` in any repo that uses the theme contains settings that will be overwritten by the next step — so back that up first:
+
+```bash
+cd ~/Projects/your-repo-name
+cp _config.yml _config.yml.backup
+```
+
+### Step 2: Copy Updated Theme Files
+
+From the github-readme-theme repository, run the copy script to pull in upstream changes:
+
+```bash
+cd /path/to/github-readme-theme
+./copy-to-repo.sh /path/to/your-repo-name
+```
+
+This updates:
+- `_layouts/`, `_includes/`, `assets/` (CSS/JS)
+- `scripts/` (generator script)
+- `.github/workflows/` (GitHub Actions)
+- `Gemfile`, `package.json`, `.gitignore`
+
+### Step 3: Restore Your Config
+
+Restore your repo-specific settings that got overwritten in Step 2:
+
+```bash
+cd ~/Projects/your-repo-name
+cp _config.yml.backup _config.yml
+# Verify/edit _config.yml has your repo-specific values:
+# - repo_owner: "your-username"
+# - repo_name: "your-repo-name"
+# - baseurl: "/your-repo-name" (or "" for custom domain)
+# - url: "https://your-domain.com"
+```
+
+### Step 4: Test Locally (Optional)
+
+```bash
+npm run generate
+npm run serve
+```
+
+### Step 5: Commit and Push
+
+```bash
+git add .
+git commit -m "Update theme with latest changes"
+git pull --no-rebase  # Merge any remote changes
+git push
+```
+
+**Note:** If you get merge conflicts:
+- For `.github/workflows/build.yml`: Use the version from the theme repo (it has deployment enabled)
+- For generated files (`index.md`, `_data/nav.json`): Regenerate with `npm run generate`
+
+</details>
+
 ## How It Works
 
 ### The Generator Script
