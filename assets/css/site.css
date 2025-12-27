@@ -304,6 +304,39 @@ body {
   font-size: 14px;
 }
 
+.sidebar-toggle-desktop {
+  display: none;
+  background: #e7ebef;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  color: #5b636d;
+  border-radius: 6px;
+  transition: background-color 0.2s, color 0.2s;
+  flex-shrink: 0;
+  position: relative;
+  top: 2px;
+}
+
+.sidebar-toggle-desktop svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.sidebar-toggle-desktop:hover {
+  background-color: #f6f8fa;
+  color: #5b636d;
+}
+
+.site-container.sidebar-collapsed .sidebar-toggle-desktop {
+  display: flex;
+}
+
 .breadcrumb-container {
   flex: 1;
 }

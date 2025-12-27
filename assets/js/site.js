@@ -41,6 +41,7 @@
   
   function initSidebar() {
     const toggle = document.getElementById(SIDEBAR_TOGGLE_ID);
+    const toggleDesktop = document.getElementById('sidebar-toggle-desktop');
     const navButtonMobile = document.getElementById('nav-button-mobile');
     const container = document.querySelector('.' + SITE_CONTAINER_CLASS);
     
@@ -92,9 +93,13 @@
       
       updateIcons(isCollapsed);
       
-      // Toggle sidebar on button click
+      // Toggle sidebar on button click (both in sidebar and content header)
       if (toggle) {
         toggle.addEventListener('click', toggleSidebar);
+      }
+      
+      if (toggleDesktop) {
+        toggleDesktop.addEventListener('click', toggleSidebar);
       }
     }
     
