@@ -2,6 +2,9 @@
 
 A reusable Jekyll theme that automatically converts your GitHub repository's `README.md` files into a beautiful, GitHub-style documentation site with automatic navigation.
 
+> [!NOTE]
+> Did you know that GitHub automatically renders any file named README.md at the bottom of the page whenever a visitor navigates into a specific _sub_-directory? While the official GitHub [documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes) primarily highlights how a READMEs at the root of a repository serves as the main landing page, the web interface is designed to treat every folder as a potential landing page. Thus, you can use READMEs in subdirectories as a way to layout a documentation site. The only problems is all that unnecessary UI surronding the content gets in the way.
+
 | From this… | …to this |
 |:------:|:------:|
 | <img width="1338" height="876" alt="Screenshot 2025-12-26 at 11 39 17" src="https://github.com/user-attachments/assets/b6d9fb3b-fb2e-4a87-b22e-130232dd317f" /> | <img width="1339" height="871" alt="Screenshot 2025-12-26 at 11 39 46" src="https://github.com/user-attachments/assets/366724ef-d1ac-4950-8bab-06d8d2f61714" /> |
