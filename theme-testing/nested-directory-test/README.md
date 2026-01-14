@@ -2,23 +2,27 @@
 
 Body text.
 
-## H2
+# [Header that is a link](https://github.com/lukehefson/github-readme-theme/tree/main/theme-testing/nested-directory-test)
 
 Body text.
 
-### H3
+## Header 2
 
 Body text.
 
-#### H4
+### Header 3
 
 Body text.
 
-##### H5
+#### Header 4
 
 Body text.
 
-###### H6
+##### Header 5
+
+Body text.
+
+###### Header 6
 
 Paragraph with **bold**, *italic*, ***bold italic***, ~~strikethrough~~, `inline code`, and <sub>subscript</sub> / <sup>superscript</sup>.  
 Keyboard key example: <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd>.
@@ -76,10 +80,18 @@ brew install git
 ```
 
 ```js
-// JavaScript code block
-function hi() {
-  console.log("Hello!");
+// JavaScript code block with syntax highlighting.
+var fun = function lang(l) {
+  dateformat.i18n = require('./lang/' + l)
+  return true;
 }
+```
+
+```ruby
+# Ruby code with syntax highlighting
+GitHubPages::Dependencies.gems.each do |gem, version|
+  s.add_dependency(gem, "= #{version}")
+end
 ```
 
 ```diff
@@ -88,6 +100,10 @@ function hi() {
 ! Warning
 @@ Diff hunk header @@
 # Comment
+```
+
+```
+Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
 ```
 
 ## Tables
