@@ -414,6 +414,75 @@ body {
   width: 100%;
 }
 
+.markdown-body pre {
+  position: relative;
+  padding-top: 30px;
+}
+
+.code-copy-button {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 5px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background-color: #f6f8fa;
+  color: #57606a;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.code-copy-button:hover {
+  background-color: #eaeef2;
+}
+
+.code-copy-button:focus-visible {
+  outline: 2px solid #0969da;
+  outline-offset: 2px;
+}
+
+.code-copy-label {
+  display: none;
+  background-color: #24292f;
+  color: #ffffff;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.code-copy-button .octicon-check {
+  display: none;
+  color: #1a7f37;
+}
+
+.code-copy-button .octicon-copy {
+  stroke: currentColor;
+  stroke-width: 0.6;
+  paint-order: stroke fill;
+}
+
+.code-copy-button.is-copied .octicon-copy {
+  display: none;
+}
+
+.code-copy-button.is-copied .octicon-check,
+.code-copy-button.is-copied .code-copy-label {
+  display: inline-flex;
+}
+
+.code-copy-button.is-copied {
+  border-color: transparent;
+}
+
+.code-copy-button.is-copied:hover {
+  background-color: #f6f8fa;
+}
+
 .markdown-body img {
   max-width: 100%;
   height: auto;
@@ -671,5 +740,23 @@ body {
   .nav-button-mobile:hover {
     background-color: #21262d;
     color: #adbac7;
+  }
+
+  .code-copy-button {
+    background-color: #21262d;
+    color: #adbac7;
+  }
+
+  .code-copy-button:hover {
+    background-color: #30363d;
+  }
+
+  .code-copy-button.is-copied:hover {
+    background-color: #21262d;
+  }
+
+  .code-copy-label {
+    background-color: #1f2328;
+    color: #ffffff;
   }
 }
