@@ -501,7 +501,7 @@ body {
 
 .markdown-body .header-anchor-link {
   position: absolute;
-  right: calc(100% + 10px);
+  right: calc(100% + 8px);
   top: 50%;
   transform: translateY(-50%);
   display: inline-flex;
@@ -511,11 +511,25 @@ body {
   opacity: 0;
   transition: opacity 0.15s ease;
   line-height: 1;
-  font-size: 16px;
 }
 
 .markdown-body .heading-with-anchor:hover .header-anchor-link {
   opacity: 1;
+}
+
+/* Vertical alignment adjustments per header level */
+.markdown-body h1.heading-with-anchor .header-anchor-link {
+  transform: translateY(calc(-50% - 2px));
+}
+
+.markdown-body h2.heading-with-anchor .header-anchor-link {
+  transform: translateY(calc(-50% - 1px));
+}
+
+.markdown-body h3.heading-with-anchor .header-anchor-link,
+.markdown-body h4.heading-with-anchor .header-anchor-link,
+.markdown-body h5.heading-with-anchor .header-anchor-link {
+  transform: translateY(calc(-50% + 1px));
 }
 
 .markdown-body .header-anchor-link:hover {
