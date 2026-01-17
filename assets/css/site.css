@@ -502,6 +502,54 @@ body {
   text-decoration: underline;
 }
 
+/* Header anchor link styles */
+.markdown-body .heading-with-anchor {
+  position: relative;
+  scroll-margin-top: calc(var(--header-height) + var(--spacing-unit));
+}
+
+.markdown-body .header-anchor-link {
+  position: absolute;
+  right: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  line-height: 1;
+}
+
+.markdown-body .heading-with-anchor:hover .header-anchor-link {
+  opacity: 1;
+}
+
+/* Vertical alignment adjustments per header level */
+.markdown-body h1.heading-with-anchor .header-anchor-link {
+  transform: translateY(calc(-50% - 2px));
+}
+
+.markdown-body h2.heading-with-anchor .header-anchor-link {
+  transform: translateY(calc(-50% - 1px));
+}
+
+.markdown-body h3.heading-with-anchor .header-anchor-link,
+.markdown-body h4.heading-with-anchor .header-anchor-link,
+.markdown-body h5.heading-with-anchor .header-anchor-link {
+  transform: translateY(calc(-50% + 1px));
+}
+
+.markdown-body .header-anchor-link:hover {
+  color: #0969da;
+  text-decoration: none;
+}
+
+.markdown-body .heading-with-anchor:hover .header-anchor-link {
+  opacity: 1;
+}
+
 .markdown-body .footnote::before {
   content: '[';
 }
@@ -767,5 +815,13 @@ body {
   .code-copy-label {
     background-color: #1f2328;
     color: #ffffff;
+  }
+
+  .markdown-body .header-anchor-link {
+    color: #768390;
+  }
+
+  .markdown-body .header-anchor-link:hover {
+    color: #539bf5;
   }
 }

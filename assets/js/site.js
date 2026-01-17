@@ -333,12 +333,13 @@
     initCodeCopyButtons();
   }
 
+  // Generate IDs for headings that don't have them
   function slugifyHeading(text) {
     return text
       .toLowerCase()
       .trim()
-      .replace(/[^a-z0-9\\s-]/g, '')
-      .replace(/\\s+/g, '-')
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
       .replace(/-+/g, '-');
   }
 
@@ -370,9 +371,43 @@
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHeadingIds);
-  } else {
+  // Header anchor link functionality
+  function createLinkIcon() {
+    // Simple link icon (Feather icons style)
+    return '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#24292f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>';
+  }
+
+  function initHeaderAnchorLinks() {
+    var headers = document.querySelectorAll('.markdown-body h1[id], .markdown-body h2[id], .markdown-body h3[id], .markdown-body h4[id], .markdown-body h5[id], .markdown-body h6[id]');
+    
+    headers.forEach(function(header) {
+      // Skip if already processed
+      if (header.dataset.anchorLink === 'true') return;
+      
+      header.dataset.anchorLink = 'true';
+      header.classList.add('heading-with-anchor');
+      
+      // Create the anchor link element
+      var anchor = document.createElement('a');
+      anchor.className = 'header-anchor-link';
+      anchor.href = '#' + header.id;
+      anchor.setAttribute('aria-label', 'Link to this section');
+      anchor.innerHTML = createLinkIcon();
+      
+      // Append the anchor link to the header
+      header.appendChild(anchor);
+    });
+  }
+
+  // Initialize heading IDs first, then add anchor links
+  function initHeadingsAndAnchors() {
     initHeadingIds();
+    initHeaderAnchorLinks();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeadingsAndAnchors);
+  } else {
+    initHeadingsAndAnchors();
   }
 })();
