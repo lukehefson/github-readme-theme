@@ -333,6 +333,44 @@
     initCodeCopyButtons();
   }
 
+  // Generate IDs for headings that don't have them
+  function slugifyHeading(text) {
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
+  }
+
+  function initHeadingIds() {
+    const usedIds = new Set();
+    document.querySelectorAll('[id]').forEach(el => {
+      usedIds.add(el.id);
+    });
+
+    const headings = document.querySelectorAll(
+      '.markdown-body h1, .markdown-body h2, .markdown-body h3, ' +
+      '.markdown-body h4, .markdown-body h5, .markdown-body h6'
+    );
+
+    headings.forEach(heading => {
+      if (heading.id) return;
+      const base = slugifyHeading(heading.textContent || '');
+      if (!base) return;
+
+      let candidate = base;
+      let suffix = 1;
+      while (usedIds.has(candidate)) {
+        candidate = `${base}-${suffix}`;
+        suffix += 1;
+      }
+
+      heading.id = candidate;
+      usedIds.add(candidate);
+    });
+  }
+
   // Header anchor link functionality
   function createLinkIcon() {
     // Simple link icon (Feather icons style)
@@ -361,9 +399,15 @@
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHeaderAnchorLinks);
-  } else {
+  // Initialize heading IDs first, then add anchor links
+  function initHeadingsAndAnchors() {
+    initHeadingIds();
     initHeaderAnchorLinks();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeadingsAndAnchors);
+  } else {
+    initHeadingsAndAnchors();
   }
 })();
