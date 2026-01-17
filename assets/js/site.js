@@ -332,4 +332,37 @@
   } else {
     initCodeCopyButtons();
   }
+
+  // Header anchor link functionality
+  function createLinkIcon() {
+    return '🔗';
+  }
+
+  function initHeaderAnchorLinks() {
+    var headers = document.querySelectorAll('.markdown-body h1[id], .markdown-body h2[id], .markdown-body h3[id], .markdown-body h4[id], .markdown-body h5[id], .markdown-body h6[id]');
+    
+    headers.forEach(function(header) {
+      // Skip if already processed
+      if (header.dataset.anchorLink === 'true') return;
+      
+      header.dataset.anchorLink = 'true';
+      header.classList.add('heading-with-anchor');
+      
+      // Create the anchor link element
+      var anchor = document.createElement('a');
+      anchor.className = 'header-anchor-link';
+      anchor.href = '#' + header.id;
+      anchor.setAttribute('aria-label', 'Link to this section');
+      anchor.innerHTML = createLinkIcon();
+      
+      // Append the anchor link to the header
+      header.appendChild(anchor);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeaderAnchorLinks);
+  } else {
+    initHeaderAnchorLinks();
+  }
 })();
