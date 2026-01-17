@@ -501,7 +501,7 @@ body {
 
 .markdown-body .header-anchor-link {
   position: absolute;
-  left: -1.5em;
+  right: calc(100% + 10px);
   top: 50%;
   transform: translateY(-50%);
   display: inline-flex;
@@ -511,7 +511,7 @@ body {
   opacity: 0;
   transition: opacity 0.15s ease;
   line-height: 1;
-  font-size: 0.75em;
+  font-size: 16px;
 }
 
 .markdown-body .heading-with-anchor:hover .header-anchor-link {
