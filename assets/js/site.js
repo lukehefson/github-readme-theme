@@ -499,4 +499,262 @@
   } else {
     initAutolinks();
   }
+
+  // Outline panel functionality
+  var OUTLINE_PANEL_ID = 'outline-panel';
+  var OUTLINE_TOGGLE_ID = 'outline-toggle';
+  var OUTLINE_CLOSE_ID = 'outline-close';
+  var OUTLINE_NAV_ID = 'outline-nav';
+  var OUTLINE_FILTER_ID = 'outline-filter';
+  var OUTLINE_MODAL_OVERLAY_ID = 'outline-modal-overlay';
+  var OUTLINE_MODAL_CLOSE_ID = 'outline-modal-close';
+  var OUTLINE_MODAL_NAV_ID = 'outline-modal-nav';
+  var OUTLINE_MODAL_FILTER_ID = 'outline-modal-filter-input';
+
+  function getHeadings() {
+    var markdownBody = document.querySelector('.markdown-body');
+    if (!markdownBody) return [];
+    
+    var headings = markdownBody.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    var result = [];
+    
+    headings.forEach(function(heading) {
+      var level = parseInt(heading.tagName.charAt(1), 10);
+      var id = heading.id;
+      var text = heading.textContent.trim();
+      
+      // Remove any anchor link text that might be appended
+      var anchorLink = heading.querySelector('.header-anchor-link');
+      if (anchorLink) {
+        text = text.replace(anchorLink.textContent, '').trim();
+      }
+      
+      if (text) {
+        result.push({
+          level: level,
+          id: id,
+          text: text,
+          element: heading
+        });
+      }
+    });
+    
+    return result;
+  }
+
+  function createOutlineList(headings, containerId) {
+    var container = document.getElementById(containerId);
+    if (!container) return;
+    
+    var ul = document.createElement('ul');
+    ul.className = 'outline-list';
+    
+    headings.forEach(function(heading) {
+      var li = document.createElement('li');
+      li.className = 'outline-item';
+      li.setAttribute('data-level', heading.level);
+      li.setAttribute('data-text', heading.text.toLowerCase());
+      
+      var link = document.createElement('a');
+      link.className = 'outline-link';
+      link.textContent = heading.text;
+      link.href = heading.id ? '#' + heading.id : '#';
+      
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        scrollToHeading(heading);
+        setActiveOutlineItem(link);
+      });
+      
+      li.appendChild(link);
+      ul.appendChild(li);
+    });
+    
+    container.innerHTML = '';
+    container.appendChild(ul);
+  }
+
+  function scrollToHeading(heading) {
+    if (heading.element) {
+      heading.element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Update URL hash without jumping
+      if (heading.id) {
+        history.pushState(null, '', '#' + heading.id);
+      }
+    }
+  }
+
+  function setActiveOutlineItem(clickedLink) {
+    // Remove active class from all outline links in both panel and modal
+    var allLinks = document.querySelectorAll('.outline-link');
+    allLinks.forEach(function(link) {
+      link.classList.remove('is-active');
+    });
+    
+    // Add active class to clicked link
+    clickedLink.classList.add('is-active');
+    
+    // Also activate the corresponding link in the other container (panel/modal sync)
+    var href = clickedLink.getAttribute('href');
+    if (href) {
+      allLinks.forEach(function(link) {
+        if (link !== clickedLink && link.getAttribute('href') === href) {
+          link.classList.add('is-active');
+        }
+      });
+    }
+  }
+
+  function filterOutline(filterValue, containerId) {
+    var container = document.getElementById(containerId);
+    if (!container) return;
+    
+    var items = container.querySelectorAll('.outline-item');
+    var searchText = filterValue.toLowerCase().trim();
+    
+    items.forEach(function(item) {
+      var text = item.getAttribute('data-text') || '';
+      if (searchText === '' || text.indexOf(searchText) !== -1) {
+        item.classList.remove('is-hidden');
+      } else {
+        item.classList.add('is-hidden');
+      }
+    });
+  }
+
+  function openOutlinePanel() {
+    var panel = document.getElementById(OUTLINE_PANEL_ID);
+    if (panel) {
+      panel.classList.add('is-open');
+    }
+  }
+
+  function closeOutlinePanel() {
+    var panel = document.getElementById(OUTLINE_PANEL_ID);
+    if (panel) {
+      panel.classList.remove('is-open');
+    }
+  }
+
+  function openOutlineModal() {
+    var modal = document.getElementById(OUTLINE_MODAL_OVERLAY_ID);
+    if (modal) {
+      modal.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeOutlineModal() {
+    var modal = document.getElementById(OUTLINE_MODAL_OVERLAY_ID);
+    if (modal) {
+      modal.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+  }
+
+  function isOutlinePanelOpen() {
+    var panel = document.getElementById(OUTLINE_PANEL_ID);
+    return panel && panel.classList.contains('is-open');
+  }
+
+  function isOutlineModalOpen() {
+    var modal = document.getElementById(OUTLINE_MODAL_OVERLAY_ID);
+    return modal && modal.classList.contains('is-open');
+  }
+
+  function toggleOutline() {
+    var isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+      if (isOutlineModalOpen()) {
+        closeOutlineModal();
+      } else {
+        openOutlineModal();
+      }
+    } else {
+      if (isOutlinePanelOpen()) {
+        closeOutlinePanel();
+      } else {
+        openOutlinePanel();
+      }
+    }
+  }
+
+  function closeOutline() {
+    closeOutlinePanel();
+    closeOutlineModal();
+  }
+
+  function initOutline() {
+    var headings = getHeadings();
+    
+    // Build outline lists for both panel and modal
+    createOutlineList(headings, OUTLINE_NAV_ID);
+    createOutlineList(headings, OUTLINE_MODAL_NAV_ID);
+    
+    // Toggle button
+    var toggleBtn = document.getElementById(OUTLINE_TOGGLE_ID);
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', toggleOutline);
+    }
+    
+    // Panel close button
+    var panelCloseBtn = document.getElementById(OUTLINE_CLOSE_ID);
+    if (panelCloseBtn) {
+      panelCloseBtn.addEventListener('click', closeOutlinePanel);
+    }
+    
+    // Modal close button
+    var modalCloseBtn = document.getElementById(OUTLINE_MODAL_CLOSE_ID);
+    if (modalCloseBtn) {
+      modalCloseBtn.addEventListener('click', closeOutlineModal);
+    }
+    
+    // Modal overlay click to close
+    var modalOverlay = document.getElementById(OUTLINE_MODAL_OVERLAY_ID);
+    if (modalOverlay) {
+      modalOverlay.addEventListener('click', function(e) {
+        if (e.target === modalOverlay) {
+          closeOutlineModal();
+        }
+      });
+    }
+    
+    // Filter input for panel
+    var panelFilter = document.getElementById(OUTLINE_FILTER_ID);
+    if (panelFilter) {
+      panelFilter.addEventListener('input', function() {
+        filterOutline(this.value, OUTLINE_NAV_ID);
+      });
+    }
+    
+    // Filter input for modal
+    var modalFilter = document.getElementById(OUTLINE_MODAL_FILTER_ID);
+    if (modalFilter) {
+      modalFilter.addEventListener('input', function() {
+        filterOutline(this.value, OUTLINE_MODAL_NAV_ID);
+      });
+    }
+    
+    // Escape key to close
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeOutline();
+      }
+    });
+    
+    // Handle resize - close modal if switching to desktop
+    window.addEventListener('resize', function() {
+      var isMobile = window.innerWidth <= 768;
+      if (!isMobile && isOutlineModalOpen()) {
+        closeOutlineModal();
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initOutline);
+  } else {
+    initOutline();
+  }
 })();
