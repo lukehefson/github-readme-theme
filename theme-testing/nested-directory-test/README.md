@@ -48,7 +48,7 @@ Keyboard key example: <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd>.
 ## Links
 
 [Inline link](https://github.com)  
-[Section link to H6 heading](#h6)  
+[Section link to H6 heading](#header-6)  
 Autolink: https://example.com
 
 ## Images
