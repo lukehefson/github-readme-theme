@@ -410,4 +410,93 @@
   } else {
     initHeadingsAndAnchors();
   }
+
+  // Autolink functionality - convert plain URLs to clickable links
+  // Matches URLs starting with http:// or https:// that are not already inside links
+  function initAutolinks() {
+    const markdownBody = document.querySelector('.markdown-body');
+    if (!markdownBody) return;
+
+    // URL regex pattern - matches http:// and https:// URLs
+    const urlPattern = /\b(https?:\/\/[^\s<>\[\]()'"]+[^\s<>\[\]()'",.:;!?])/gi;
+
+    // Process text nodes within the markdown body
+    const walker = document.createTreeWalker(
+      markdownBody,
+      NodeFilter.SHOW_TEXT,
+      {
+        acceptNode: function(node) {
+          // Skip if parent is already a link, code, pre, script, or style
+          const parent = node.parentElement;
+          if (!parent) return NodeFilter.FILTER_REJECT;
+          
+          const tagName = parent.tagName.toLowerCase();
+          if (tagName === 'a' || tagName === 'code' || tagName === 'pre' || 
+              tagName === 'script' || tagName === 'style' || tagName === 'textarea') {
+            return NodeFilter.FILTER_REJECT;
+          }
+          
+          // Also check if any ancestor is a link or code block
+          let ancestor = parent;
+          while (ancestor && ancestor !== markdownBody) {
+            const ancestorTag = ancestor.tagName.toLowerCase();
+            if (ancestorTag === 'a' || ancestorTag === 'pre' || ancestorTag === 'code') {
+              return NodeFilter.FILTER_REJECT;
+            }
+            ancestor = ancestor.parentElement;
+          }
+          
+          // Only accept if the text contains a URL
+          if (urlPattern.test(node.textContent)) {
+            urlPattern.lastIndex = 0; // Reset regex state
+            return NodeFilter.FILTER_ACCEPT;
+          }
+          return NodeFilter.FILTER_REJECT;
+        }
+      }
+    );
+
+    const textNodes = [];
+    while (walker.nextNode()) {
+      textNodes.push(walker.currentNode);
+    }
+
+    // Process each text node
+    textNodes.forEach(function(textNode) {
+      const text = textNode.textContent;
+      urlPattern.lastIndex = 0; // Reset regex state
+      
+      if (!urlPattern.test(text)) return;
+      urlPattern.lastIndex = 0; // Reset again for split/match
+
+      // Split text by URLs and create elements
+      const parts = text.split(urlPattern);
+      if (parts.length <= 1) return;
+
+      const fragment = document.createDocumentFragment();
+      
+      parts.forEach(function(part) {
+        if (urlPattern.test(part)) {
+          urlPattern.lastIndex = 0;
+          // Create link element
+          const link = document.createElement('a');
+          link.href = part;
+          link.textContent = part;
+          fragment.appendChild(link);
+        } else if (part) {
+          // Create text node for non-URL parts
+          fragment.appendChild(document.createTextNode(part));
+        }
+      });
+
+      // Replace the original text node with the fragment
+      textNode.parentNode.replaceChild(fragment, textNode);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAutolinks);
+  } else {
+    initAutolinks();
+  }
 })();
