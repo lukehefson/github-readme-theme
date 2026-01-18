@@ -563,7 +563,7 @@
       link.addEventListener('click', function(e) {
         e.preventDefault();
         scrollToHeading(heading);
-        closeOutline();
+        setActiveOutlineItem(link);
       });
       
       li.appendChild(link);
@@ -581,6 +581,27 @@
       if (heading.id) {
         history.pushState(null, '', '#' + heading.id);
       }
+    }
+  }
+
+  function setActiveOutlineItem(clickedLink) {
+    // Remove active class from all outline links in both panel and modal
+    var allLinks = document.querySelectorAll('.outline-link');
+    allLinks.forEach(function(link) {
+      link.classList.remove('is-active');
+    });
+    
+    // Add active class to clicked link
+    clickedLink.classList.add('is-active');
+    
+    // Also activate the corresponding link in the other container (panel/modal sync)
+    var href = clickedLink.getAttribute('href');
+    if (href) {
+      allLinks.forEach(function(link) {
+        if (link !== clickedLink && link.getAttribute('href') === href) {
+          link.classList.add('is-active');
+        }
+      });
     }
   }
 
