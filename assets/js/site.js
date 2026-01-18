@@ -501,7 +501,6 @@
   }
 
   // Outline panel functionality
-  var OUTLINE_PANEL_ID = 'outline-panel';
   var OUTLINE_TOGGLE_ID = 'outline-toggle';
   var OUTLINE_CLOSE_ID = 'outline-close';
   var OUTLINE_NAV_ID = 'outline-nav';
@@ -510,6 +509,7 @@
   var OUTLINE_MODAL_CLOSE_ID = 'outline-modal-close';
   var OUTLINE_MODAL_NAV_ID = 'outline-modal-nav';
   var OUTLINE_MODAL_FILTER_ID = 'outline-modal-filter-input';
+  var OUTLINE_OPEN_CLASS = 'outline-open';
 
   function getHeadings() {
     var markdownBody = document.querySelector('.markdown-body');
@@ -623,16 +623,16 @@
   }
 
   function openOutlinePanel() {
-    var panel = document.getElementById(OUTLINE_PANEL_ID);
-    if (panel) {
-      panel.classList.add('is-open');
+    var container = document.querySelector('.' + SITE_CONTAINER_CLASS);
+    if (container) {
+      container.classList.add(OUTLINE_OPEN_CLASS);
     }
   }
 
   function closeOutlinePanel() {
-    var panel = document.getElementById(OUTLINE_PANEL_ID);
-    if (panel) {
-      panel.classList.remove('is-open');
+    var container = document.querySelector('.' + SITE_CONTAINER_CLASS);
+    if (container) {
+      container.classList.remove(OUTLINE_OPEN_CLASS);
     }
   }
 
@@ -653,8 +653,8 @@
   }
 
   function isOutlinePanelOpen() {
-    var panel = document.getElementById(OUTLINE_PANEL_ID);
-    return panel && panel.classList.contains('is-open');
+    var container = document.querySelector('.' + SITE_CONTAINER_CLASS);
+    return container && container.classList.contains(OUTLINE_OPEN_CLASS);
   }
 
   function isOutlineModalOpen() {

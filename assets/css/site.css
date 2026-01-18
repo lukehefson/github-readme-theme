@@ -873,25 +873,26 @@ body {
   color: #5b636d;
 }
 
-/* Outline Panel (Desktop) */
+/* Outline Panel (Desktop - grid-based) */
 .outline-panel {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 320px;
-  height: 100vh;
   background-color: var(--bg-color);
   border-left: 1px solid var(--border-color);
-  transform: translateX(100%);
-  transition: transform 0.2s ease;
-  z-index: 100;
+  overflow: hidden;
+  position: sticky;
+  top: 0;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.outline-panel.is-open {
+.site-container.outline-open .outline-panel {
   transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .outline-header {
