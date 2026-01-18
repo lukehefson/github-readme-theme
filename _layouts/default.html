@@ -39,9 +39,7 @@
         </div>
         <div class="header-actions">
           {% include edit_button.html %}
-          <button class="outline-button" id="outline-toggle" aria-label="Show outline">
-            {% octicon list-unordered height:16 %}
-          </button>
+          {% include outline_button.html %}
         </div>
       </header>
       
@@ -50,7 +48,7 @@
       </article>
     </main>
     
-    <!-- Outline Panel (Desktop - part of grid layout) -->
+    <!-- Outline Panel (Desktop) -->
     <aside class="outline-panel" id="outline-panel" aria-labelledby="outline-heading">
       <div class="outline-header">
         <h2 id="outline-heading">Outline</h2>
