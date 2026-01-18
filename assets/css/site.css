@@ -3,6 +3,8 @@
 :root {
   --sidebar-width: 320px;
   --sidebar-collapsed-width: 0px;
+  --outline-width: 320px;
+  --outline-collapsed-width: 0px;
   --header-height: 60px;
   --spacing-unit: 16px;
   --border-color: #d0d7de;
@@ -29,13 +31,21 @@ body {
 
 .site-container {
   display: grid;
-  grid-template-columns: var(--sidebar-width) 1fr;
+  grid-template-columns: var(--sidebar-width) 1fr var(--outline-collapsed-width);
   min-height: 100vh;
   transition: grid-template-columns 0.2s ease;
 }
 
 .site-container.sidebar-collapsed {
-  grid-template-columns: var(--sidebar-collapsed-width) 1fr;
+  grid-template-columns: var(--sidebar-collapsed-width) 1fr var(--outline-collapsed-width);
+}
+
+.site-container.outline-open {
+  grid-template-columns: var(--sidebar-width) 1fr var(--outline-width);
+}
+
+.site-container.sidebar-collapsed.outline-open {
+  grid-template-columns: var(--sidebar-collapsed-width) 1fr var(--outline-width);
 }
 
 /* Sidebar Styles */
