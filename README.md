@@ -23,6 +23,7 @@ This theme scans your repository for all `README.md` files and creates a documen
 
 - 🎨 Matches GitHub's markdown styling exactly
 - 📁 Automatic navigation tree from README files
+- 📄 Single-README repositories get a focused layout without sidebar navigation
 - 🔄 Collapsible sidebar with localStorage persistence
 - 🍞 Breadcrumb navigation
 - ✏️ Direct edit links to GitHub
